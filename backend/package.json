@@ -1,0 +1,15 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "facebook backend api",
+  "main": "server.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [
+    "facebook",
+    "clone"
+  ],
+  "author": "Kosam Omollo",
+  "license": "ISC"
+}
