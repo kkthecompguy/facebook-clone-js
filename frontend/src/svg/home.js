@@ -1,5 +1,3 @@
-import React from "react";
-
 function Home({ color }) {
   return (
     <svg width="28" height="28" fill={color} viewBox="0 0 28 28">
