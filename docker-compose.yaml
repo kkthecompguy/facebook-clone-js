@@ -1,0 +1,43 @@
+version: '3'
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: fb_backend
+    depends_on:
+      - mongodb
+    env_file:
+      - ./backend/.env
+    ports:
+      - 3001:3001
+    volumes:
+      - ./backend:/app
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: fb_frontend
+    env_file:
+      - ./frontend/.env
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/app
+
+  mongodb:
+    image: mongo:4.0.28-xenial
+    container_name: fb_mongodb
+    restart: always
+    env_file:
+      - ./backend/.env
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    volumes:
+      - dbdata:/data/db
+
+volumes:
+  dbdata:

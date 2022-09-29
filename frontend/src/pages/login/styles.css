@@ -89,6 +89,15 @@
   color: var(--color-primary);
 }
 
+.register::-webkit-scrollbar {
+  width: 5px;
+}
+
+.register::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
 .register_header {
   position: relative;
   display: flex;
@@ -250,10 +259,44 @@
 
 /* ------footer------- */
 
+/* ------dob and gender errors------- */
+.reg_grid .input_error {
+  width: 300px;
+  position: absolute;
+  top: 70px;
+}
+.input_error_select_large {
+  left: -97%;
+  top: 15px !important;
+}
+/* ------dob and gender errors------- */
+
+/* ------error and success style------- */
+.error_text {
+  color: var(--danger-color);
+}
+.success_text {
+  color: var(--green-color);
+}
+/* ------error and success style------- */
+
 /* ---- media queries ----- */
 @media (min-width: 539px) {
   .login_footer_wrap {
     max-width: 520px;
+  }
+  .register {
+    width: 400px;
+  }
+  .reg_line {
+    flex-direction: row;
+  }
+  .reg_grid select,
+  .reg_grid label {
+    width: 110px;
+  }
+  .reg_grid .input_error {
+    width: 350px;
   }
 }
 
@@ -288,7 +331,7 @@
     width: 400px;
   }
   .input_wrap {
-    width: 360px !important;
+    width: 360px;
   }
   .login_footer_wrap {
     max-width: 900px;
