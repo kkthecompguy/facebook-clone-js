@@ -747,7 +747,7 @@
   width: 21px;
 }
 
-/* .compact_icon {
+.compact_icon {
   background-image: url(../../../public/icons/icons38.png);
   background-position: 0 -130px;
   background-size: auto;
@@ -755,4 +755,4 @@
   height: 20px;
   background-repeat: no-repeat;
   display: inline-block;
-} */
+}

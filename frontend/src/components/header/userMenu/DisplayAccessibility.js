@@ -8,7 +8,7 @@ function DisplayAccessibility(props) {
         Display & Accessibility
       </div>
       <div className="mmenu_main">
-        <div className="small_circle">
+        <div className="small_circle" style={{ width: "50px" }}>
           <i className="dark_filled_icon"></i>
         </div>
         <div className="mmenu_col">
@@ -28,7 +28,7 @@ function DisplayAccessibility(props) {
         <input type="radio" name="dark" id="darkOn" />
       </label>
       <div className="mmenu_main">
-        <div className="small_circle">
+        <div className="small_circle" style={{ width: "50px" }}>
           <i className="compact_icon"></i>
         </div>
         <div className="mmenu_col">

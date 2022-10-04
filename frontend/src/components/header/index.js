@@ -23,13 +23,17 @@ import UserMenu from "./userMenu";
 function Header(props) {
   const [showSearchMenu, setShowSearchMenu] = useState(false);
   const [showAllMenu, setShowAllMenu] = useState(false);
+  const [showUserMenu, setShowUserMenu] = useState(false);
   const user = useSelector((state) => state.user);
   const allMenu = useRef(null);
+  const userMenu = useRef(null);
   const color = "#65676b";
-  console.log(showAllMenu);
 
   useClickOutside(allMenu, () => {
     setShowAllMenu(false);
+  });
+  useClickOutside(userMenu, () => {
+    setShowUserMenu(false);
   });
   return (
     <header>
@@ -75,11 +79,12 @@ function Header(props) {
           <span>{user?.firstName}</span>
         </Link>
         <div
-          className="circle_icon hover1"
+          className={`circle_icon hover1 ${showAllMenu && "active_header"}`}
           ref={allMenu}
-          onClick={() => setShowAllMenu(true)}
         >
-          <Menu />
+          <div onClick={() => setShowAllMenu((prev) => !prev)}>
+            <Menu />
+          </div>
           {showAllMenu && <AllMenu setShowAllMenu={setShowAllMenu} />}
         </div>
         <div className="circle_icon hover1">
@@ -89,9 +94,14 @@ function Header(props) {
           <Notifications />
           <div className="right_notification">5</div>
         </div>
-        <div className="circle_icon hover1">
-          <ArrowDown />
-          <UserMenu user={user} />
+        <div
+          className={`circle_icon hover1 ${showUserMenu && "active_header"}`}
+          ref={userMenu}
+        >
+          <div onClick={() => setShowUserMenu((prev) => !prev)}>
+            <ArrowDown />
+          </div>
+          {showUserMenu && <UserMenu user={user} />}
         </div>
       </div>
     </header>
