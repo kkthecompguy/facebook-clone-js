@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import useClickOutside from "../../helpers/clickOutside";
+import useClickOutside from "../../hooks/clickOutside";
 import {
   ArrowDown,
   Friends,

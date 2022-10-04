@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import useClickOutside from "../../helpers/clickOutside";
+import useClickOutside from "../../hooks/clickOutside";
 import { Return, Search } from "../../svg";
 
 function SearchMenu(props) {
