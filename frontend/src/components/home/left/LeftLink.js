@@ -1,7 +1,7 @@
 function LeftLink({ img, text, notification }) {
   return (
-    <div className="left_link">
-      <img src={`../../../left/${img}.png`} />
+    <div className="left_link hover1">
+      <img src={`../../../left/${img}.png`} alt="" />
       {notification ? (
         <div className="col">
           <div className="col_1">{text}</div>
