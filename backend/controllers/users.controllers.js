@@ -4,6 +4,7 @@ const {
   HTTP_200_OK,
   HTTP_500_INTERNAL_SERVER_ERROR,
   HTTP_400_BAD_REQUEST,
+  HTTP_403_FORBIDDEN,
 } = require("../utils/status");
 const {
   validateEmail,
@@ -99,6 +100,7 @@ controllers.activateAccount = async function (req, res) {
         .status(HTTP_400_BAD_REQUEST)
         .json({ message: "invalid token or token has expired" });
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (req.user.id !== decoded.id) return res.status(HTTP_403_FORBIDDEN).json({message: "You don't have the authorization to complete this operation"});
     const user = await UserModel.findById(decoded.id);
     if (!user)
       return res
@@ -167,5 +169,26 @@ controllers.login = async function (req, res) {
       .json({ message: error.message });
   }
 };
+
+controllers.sendVerification = async function (req, res) {
+  try {
+    const user = await UserModel.findById(req.user.id);
+    if (user.verified) return res
+    .status(HTTP_400_BAD_REQUEST)
+    .json({
+      message:
+        "this account is already activated",
+    });
+    const emailVerificationToken = user.getJWT();
+    const url = `${process.env.BASE_URL}/activate/${emailVerificationToken}`;
+    await sendVerificationEmail(user.email, user.firstName, url);
+    return res.status(HTTP_200_OK).json({message: "Email verification has been sent to your email"})
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(HTTP_500_INTERNAL_SERVER_ERROR)
+      .json({ message: error.message });
+  }
+}
 
 module.exports = controllers;

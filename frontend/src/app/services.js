@@ -15,7 +15,10 @@ const axiosService = {
     let apiurl = this.getUrl(url);
     return await axios.get(apiurl, this.config);
   },
-  post: async function (url, data) {
+  post: async function (url, data, token) {
+    if (typeof token === "string" && token.length > 0) {
+      this.config["headers"]["Authorization"] = `Bearer ${token}`;
+    }
     let apiurl = this.getUrl(url);
     return await axios.post(apiurl, data, this.config);
   },

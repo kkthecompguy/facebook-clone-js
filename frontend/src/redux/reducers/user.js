@@ -9,6 +9,8 @@ const userReducer = function (state = initialState, action) {
   switch (action.type) {
     case "LOGIN":
       return { ...state, ...action.payload };
+    case "VERIFY":
+      return { ...state, verified: action.payload };
     default:
       return state;
   }

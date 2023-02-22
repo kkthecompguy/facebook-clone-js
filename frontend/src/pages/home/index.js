@@ -4,6 +4,7 @@ import Header from "../../components/header";
 import LeftHome from "../../components/home/left";
 import RightHome from "../../components/home/right";
 import Stories from "../../components/home/stories";
+import SendVerification from "../../components/home/verification";
 import "./styles.css";
 
 function Home() {
@@ -14,6 +15,7 @@ function Home() {
       <LeftHome user={user} />
       <div className="home_middle">
         <Stories />
+        {!user.verified && <SendVerification user={user} />}
         <CreatePost user={user} />
       </div>
       <RightHome user={user} />
