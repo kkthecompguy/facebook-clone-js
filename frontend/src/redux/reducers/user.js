@@ -11,6 +11,8 @@ const userReducer = function (state = initialState, action) {
       return { ...state, ...action.payload };
     case "VERIFY":
       return { ...state, verified: action.payload };
+    case "LOGOUT":
+      return null;
     default:
       return state;
   }

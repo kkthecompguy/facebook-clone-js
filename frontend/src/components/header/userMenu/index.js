@@ -1,11 +1,20 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
 import DisplayAccessibility from "./DisplayAccessibility";
 import HelpSupport from "./HelpSupport";
 import SettingsPrivacy from "./SettingsPrivacy";
 
 function UserMenu({ user }) {
   const [visible, setVisible] = useState(0);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const logout = () => {
+    Cookies.set("user", "");
+    dispatch({ type: "LOGOUT" });
+    navigate("/login");
+  };
   return (
     <div className="mmenu">
       {visible === 0 && (
@@ -60,7 +69,7 @@ function UserMenu({ user }) {
             </div>
           </div>
           <div className="mmenu_splitter"></div>
-          <div className="mmenu_item hover3">
+          <div className="mmenu_item hover3" onClick={logout}>
             <div className="small_circle">
               <i className="logout_filled_icon"></i>
             </div>
