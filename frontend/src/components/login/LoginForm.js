@@ -100,7 +100,7 @@ function LoginForm(props) {
               </Form>
             )}
           </Formik>
-          <Link to="/forgot" className="forgot_password">
+          <Link to="/reset" className="forgot_password">
             Forgotten password?
           </Link>
           <DotLoader color="#1876f2" loading={loading} size={30} />
