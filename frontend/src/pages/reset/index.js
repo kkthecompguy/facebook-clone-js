@@ -16,6 +16,8 @@ function Reset(props) {
   const [confPassword, setConfPassword] = useState("");
   const [error, setError] = useState("");
   const [visible, setVisible] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [userInfo, setUserInfo] = useState(null);
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,6 +26,8 @@ function Reset(props) {
     dispatch({ type: "LOGOUT" });
     navigate("/login");
   };
+
+  console.log(userInfo);
   return (
     <div className="reset">
       <div className="reset_header">
@@ -45,25 +49,47 @@ function Reset(props) {
       </div>
       <div className="reset_wrap">
         {visible === 0 && (
-          <SearchAccount email={email} error={error} setEmail={setEmail} />
+          <SearchAccount
+            user={user}
+            email={email}
+            error={error}
+            setEmail={setEmail}
+            setLoading={setLoading}
+            setError={setError}
+            setUserInfo={setUserInfo}
+            setVisible={setVisible}
+          />
         )}
-        {visible === 1 && <SendEmail user={user} />}
+        {visible === 1 && userInfo && (
+          <SendEmail
+            userInfo={userInfo}
+            setVisible={setVisible}
+            error={error}
+            setLoading={setLoading}
+            setError={setError}
+          />
+        )}
         {visible === 2 && (
           <CodeVerification
-            user={user}
             code={code}
             error={error}
             setCode={setCode}
+            setLoading={setLoading}
+            setError={setError}
+            setVisible={setVisible}
+            userInfo={userInfo}
           />
         )}
         {visible === 3 && (
           <ChangePassword
-            user={user}
             password={password}
             confPassword={confPassword}
             error={error}
             setPassword={setPassword}
             setConfPassword={setConfPassword}
+            setLoading={setLoading}
+            setError={setError}
+            userInfo={userInfo}
           />
         )}
       </div>

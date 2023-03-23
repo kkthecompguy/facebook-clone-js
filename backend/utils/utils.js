@@ -48,8 +48,8 @@ helpers.interpolation = function (fileStr, dataObj) {
   return tempFileStr;
 };
 
-helpers.getTemplate = async function (fileName, dataObj) {
-  const filePath = path.join(__dirname, `../templates/${fileName}.html`);
+helpers.getTemplate = async function (fileName, dataObj, ext = ".txt") {
+  const filePath = path.join(__dirname, `../templates/${fileName}${ext}`);
   const content = await fs.readFile(filePath, { encoding: "utf8", flag: "r" });
   if (content) {
     return helpers.interpolation(content, dataObj);
@@ -58,11 +58,23 @@ helpers.getTemplate = async function (fileName, dataObj) {
   }
 };
 
+helpers.generateCode = function (length) {
+  let code = "";
+  let schema = "0123456789";
+  for (let i = 0; i < length; i++) {
+    code += schema.charAt(Math.floor(Math.random() * schema.length));
+  }
+  return code;
+};
+
 // console.log(helpers.getTemplate("activate-mail", {"{{username}}": "John", "{{url}}": "https://kosamtech.com" }));
-// async function log(){
-//   const str = await helpers.getTemplate("activate-mail", {"'{{username}}'": "John", "{{url}}": "https://kosamtech.com" })
-//   console.log(str);
-// }
+async function log() {
+  const str = await helpers.getTemplate("activate-mail", {
+    "{{username}}": "JohnDoe",
+    "{{url}}": "https://kosamtech.com",
+  });
+  console.log(str);
+}
 // log();
 
 module.exports = helpers;

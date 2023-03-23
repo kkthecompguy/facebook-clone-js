@@ -52,4 +52,37 @@ mail.sendVerificationEmail = async function (email, name, url) {
   }
 };
 
+mail.sendResetCode = async function (email, name, code) {
+  auth.setCredentials({
+    refresh_token: MAILING_REFRESH,
+  });
+  const accessToken = auth.getAccessToken();
+  const smtp = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      type: "OAuth2",
+      user: EMAIL,
+      clientId: MAILING_CLIENT_ID,
+      clientSecret: MAILING_CLIENT_SECRET,
+      accessToken: accessToken,
+      refreshToken: MAILING_REFRESH,
+    },
+  });
+  const mailOptions = {
+    from: `"KosamTech" <${EMAIL}>`, // sender address
+    to: email, // list of receivers
+    subject: "Reset Facebook Password", // Subject line
+    html: await getTemplate("reset-password", {
+      "{{username}}": name,
+      "{{code}}": code,
+    }), // html body
+  };
+  try {
+    const res = await smtp.sendMail(mailOptions);
+    return res;
+  } catch (err) {
+    return err;
+  }
+};
+
 module.exports = mail;
