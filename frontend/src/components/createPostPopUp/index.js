@@ -18,7 +18,7 @@ function CreatePostPopUp({ user }) {
           <span>Create Post</span>
         </div>
         <div className="box_profile">
-          <img src={user?.picture} alt="" className="box_profile_img" />
+          <img src={user?.picture} alt="profile" className="box_profile_img" />
           <div className="box_col">
             <div className="box_profile_name">
               {user?.firstName} {user?.lastName}
