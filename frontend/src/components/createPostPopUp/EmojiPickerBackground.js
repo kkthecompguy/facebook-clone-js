@@ -20,7 +20,7 @@ function EmojiPickerBackground({ text, user, setText, typetwo }) {
     setCursorPosition(start.length + emoji.length);
   };
   return (
-    <>
+    <div className={typetwo ? "images_input" : ""}>
       <div className={`${!typetwo && "flex_center"}`}>
         <textarea
           ref={textRef}
@@ -28,7 +28,7 @@ function EmojiPickerBackground({ text, user, setText, typetwo }) {
           value={text}
           placeholder={`What's on your mind, ${user?.firstName}`}
           onChange={(e) => setText(e.target.value)}
-          className={`"post_input" ${typetwo && "inputtwo"}`}
+          className={`post_input ${typetwo && "inputtwo"}`}
         ></textarea>
       </div>
       <div className={`${!typetwo && "post_emojis_wrap"}`}>
@@ -47,7 +47,7 @@ function EmojiPickerBackground({ text, user, setText, typetwo }) {
           onClick={() => setPicker((prev) => !prev)}
         ></i>
       </div>
-    </>
+    </div>
   );
 }
 
